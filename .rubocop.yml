@@ -1,7 +1,6 @@
-AllCops:
-  TargetRubyVersion: 3.4
-  NewCops: enable
+require: rubocop-rails
 
+AllCops:
   # 除外するディレクトリ（自動生成されるファイル）
   Exclude:
     - "vendor/**/*"
@@ -10,8 +9,8 @@ AllCops:
     - "bin/*"
     - "node_modules/**/*"
 
-plugins:
-  - rubocop-rails
+  # 新ルールを有効化
+  NewCops: enable
 
 # 1行あたりの文字数をチェックする
 Layout/LineLength:
