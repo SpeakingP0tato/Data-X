@@ -59,7 +59,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
-  
+
   gem 'spring-commands-rspec'
 end
 
@@ -75,4 +75,4 @@ gem 'fiddle'
 gem 'rubocop', '~> 1.72'
 gem 'rubocop-rails', '~> 2.30'
 
-gem "spring", "~> 4.2"
+gem 'spring', '~> 4.2'
