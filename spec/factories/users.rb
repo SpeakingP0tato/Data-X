@@ -1,6 +1,8 @@
 FactoryBot.define do
   factory :user do
-    name { 'SpeakingP0tato' } # 기본 이름 설정
-    email { '96wlgh@gmail.com' } # 기본 이메일 설정
+    nickname { 'テスト太郎' }
+    sequence(:email) { |n| "test#{n}@example.com" } 
+    password { '111111' }
+    password_confirmation { '111111' }
   end
 end
