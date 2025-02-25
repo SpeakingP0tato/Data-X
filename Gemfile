@@ -76,3 +76,5 @@ gem 'rubocop', '~> 1.72'
 gem 'rubocop-rails', '~> 2.30'
 
 gem 'spring', '~> 4.2'
+
+gem 'devise'
