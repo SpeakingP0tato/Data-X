@@ -3,16 +3,18 @@ require 'rails_helper'
 describe User do
   let(:nickname) { 'テスト太郎' }
   let(:password) { '12345678' }
+  let(:user) { build(:user, nickname: nickname, password: password, password_confirmation: password) }
 
   describe '.first' do
     before do
-      @user = create(:user, nickname: nickname, password: password, password_confirmation: password)
+      @user = create(:user, nickname: nickname)
+      puts "DEBUG: Created user -> nickname: #{@user.nickname}, email: #{@user.email}"
     end
 
     subject { described_class.first }
 
     it '事前に作成した通りのUserを返す' do
-      expect(subject.nickname).to eq('テスト太郎')
+      expect(subject.nickname).to eq(nickname)
       expect(subject.email).to eq(@user.email)
     end
   end
@@ -24,7 +26,7 @@ describe User do
           let(:nickname) { 'あいうえおかきくけこさしすせそたちつてと' } # 20文字
 
           it 'User オブジェクトは有効である' do
-            user = build(:user, nickname: nickname, password: password, password_confirmation: password)
+            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
             expect(user.valid?).to be(true)
           end
         end
@@ -33,9 +35,23 @@ describe User do
           let(:nickname) { 'あいうえおかきくけこさしすせそたちつてとな' } # 21文字
 
           it 'User オブジェクトは無効である' do
-            user = build(:user, nickname: nickname, password: password, password_confirmation: password)
+            user.valid?
+            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
             expect(user.valid?).to be(false)
             expect(user.errors[:nickname]).to include('is too long (maximum is 20 characters)')
+          end
+        end
+      end
+
+      describe '存在性の検証' do
+        context 'nicknameが空欄の場合' do
+          let(:nickname) { nil }
+
+          it 'User オブジェクトは無効である' do
+            user.valid?
+            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
+            expect(user.valid?).to be(false)
+            expect(user.errors[:nickname]).to include("can't be blank") 
           end
         end
       end
