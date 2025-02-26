@@ -72,7 +72,7 @@ group :test do
 end
 gem 'fiddle'
 
-gem 'rubocop', '~> 1.72'
+gem 'rubocop', '~> 1.73'
 gem 'rubocop-rails', '~> 2.30'
 
 gem 'spring', '~> 4.2'
