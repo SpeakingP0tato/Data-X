@@ -1,0 +1,17 @@
+ja:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            nickname:
+              blank: "ニックネームを入力してください"
+              too_long: "ニックネームは%{count}文字以内で入力してください"
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              blank: "パスワードを入力してください"
+              too_short: "パスワードは%{count}文字以上で入力してください"
+              too_long: "パスワードは%{count}文字以内で入力してください"
+            password_confirmation:
+              confirmation: "確認用パスワードが一致しません"

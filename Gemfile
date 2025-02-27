@@ -66,6 +66,7 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'database_cleaner-active_record'
   gem 'rubocop-performance', require: false # 追加
   gem 'rubocop-rspec' # 追加
   gem 'selenium-webdriver'

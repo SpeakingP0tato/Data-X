@@ -1,60 +1,44 @@
 require 'rails_helper'
 
-describe User do
+RSpec.describe User, type: :model do
   let(:nickname) { 'テスト太郎' }
+  let(:email) { 'test@example.com' }
   let(:password) { '12345678' }
-  let(:user) { build(:user, nickname: nickname, password: password, password_confirmation: password) }
+  let(:user) { User.new(nickname: nickname, email: email, password: password, password_confirmation: password) }
 
-  describe '.first' do
-    before do
-      @user = create(:user, nickname: nickname)
-      puts "DEBUG: Created user -> nickname: #{@user.nickname}, email: #{@user.email}"
+  describe 'ユーザー登録' do
+    it '有効なユーザーは登録可能' do
+      expect(user).to be_valid
     end
 
-    subject { described_class.first }
-
-    it '事前に作成した通りのUserを返す' do
-      expect(subject.nickname).to eq(nickname)
-      expect(subject.email).to eq(@user.email)
+    it 'nicknameが空の場合、エラーが発生する' do
+      user.nickname = ''
+      expect(user).not_to be_valid
+      expect(user.errors[:nickname]).to include("can't be blank")
     end
-  end
 
-  describe 'validation' do
-    describe 'nickname属性' do
-      describe '文字数制限の検証' do
-        context 'nicknameが20文字以下の場合' do
-          let(:nickname) { 'あいうえおかきくけこさしすせそたちつてと' } # 20文字
+    it 'nicknameが20文字を超える場合、エラーが発生する' do
+      user.nickname = 'あ' * 21
+      expect(user).not_to be_valid
+      expect(user.errors[:nickname]).to include("is too long (maximum is 20 characters)")
+    end
 
-          it 'User オブジェクトは有効である' do
-            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
-            expect(user.valid?).to be(true)
-          end
-        end
+    it 'emailが空の場合、エラーが発生する' do
+      user.email = ''
+      expect(user).not_to be_valid
+      expect(user.errors[:email]).to include("can't be blank")
+    end
 
-        context 'nicknameが20文字を超える場合' do
-          let(:nickname) { 'あいうえおかきくけこさしすせそたちつてとな' } # 21文字
+    it 'passwordが空の場合、エラーが発生する' do
+      user.password = ''
+      expect(user).not_to be_valid
+      expect(user.errors[:password]).to include("can't be blank")
+    end
 
-          it 'User オブジェクトは無効である' do
-            user.valid?
-            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
-            expect(user.valid?).to be(false)
-            expect(user.errors[:nickname]).to include('is too long (maximum is 20 characters)')
-          end
-        end
-      end
-
-      describe '存在性の検証' do
-        context 'nicknameが空欄の場合' do
-          let(:nickname) { nil }
-
-          it 'User オブジェクトは無効である' do
-            user.valid?
-            puts "DEBUG: nickname=#{nickname}, user.valid?=#{user.valid?}, errors=#{user.errors.full_messages}"
-            expect(user.valid?).to be(false)
-            expect(user.errors[:nickname]).to include("can't be blank") 
-          end
-        end
-      end
+    it 'passwordが6文字未満の場合、エラーが発生する' do
+      user.password = 'a' * 5
+      expect(user).not_to be_valid
+      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
     end
   end
 end
