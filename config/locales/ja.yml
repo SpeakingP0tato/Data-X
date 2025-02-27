@@ -15,3 +15,6 @@ ja:
               too_long: "パスワードは%{count}文字以内で入力してください"
             password_confirmation:
               confirmation: "確認用パスワードが一致しません"
+  devise:
+    failure:
+      invalid: "メールアドレスまたはパスワードが違います。"

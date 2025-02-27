@@ -14,31 +14,29 @@ RSpec.describe User, type: :model do
     it 'nicknameが空の場合、エラーが発生する' do
       user.nickname = ''
       expect(user).not_to be_valid
-      expect(user.errors[:nickname]).to include("can't be blank")
+      expect(user.errors[:nickname]).to include("ニックネームを入力してください") 
     end
 
     it 'nicknameが20文字を超える場合、エラーが発生する' do
       user.nickname = 'あ' * 21
       expect(user).not_to be_valid
-      expect(user.errors[:nickname]).to include("is too long (maximum is 20 characters)")
+      expect(user.errors[:nickname]).to include("ニックネームは20文字以内で入力してください") 
     end
 
     it 'emailが空の場合、エラーが発生する' do
       user.email = ''
       expect(user).not_to be_valid
-      expect(user.errors[:email]).to include("can't be blank")
+      expect(user.errors[:email]).to include("メールアドレスを入力してください") 
     end
 
     it 'passwordが空の場合、エラーが発生する' do
       user.password = ''
       expect(user).not_to be_valid
-      expect(user.errors[:password]).to include("can't be blank")
-    end
+      expect(user.errors[:password]).to include("パスワードを入力してください") 
 
     it 'passwordが6文字未満の場合、エラーが発生する' do
       user.password = 'a' * 5
       expect(user).not_to be_valid
-      expect(user.errors[:password]).to include("is too short (minimum is 6 characters)")
-    end
+      expect(user.errors[:password]).to include("パスワードは6文字以上で入力してください") 
   end
 end
