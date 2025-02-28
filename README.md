@@ -1,17 +1,30 @@
 # README
 
-・記事の投稿、編集、削除機能をRailsで実装。
-・記事にカテゴリやタグを関連付けるリレーションを構築。
+ 環境設定
+Ruby: 3.4.2
+Rails: 8.0.1
+Node.js: 22.14.0
+Vue.js: 3.5.12
 
-②検索・フィルタリング機能
-・Vue.jsを用いて、記事をカテゴリごとにフィルタリングし、検索できる機能を実装。
+ユーザー認証機能
+Devise を使用し、ユーザー登録・ログイン・ログアウト機能を実装
+ログイン成功・失敗時に Flashメッセージを表示
+ログイン後 トップページにリダイレクト処理（成功時に root_path へ移動）
 
-③ユーザー認証機能
-・Railsで簡易的なログイン/ログアウト機能を追加。
+テストコードの作成
+RSpec を使用したユーザーログインに関する システムテストコード作成
+Capybara を利用したブラウザテストを実施
 
-④レスポンシブデザイン
-・フロントエンドでモバイル対応のデザインを適用。
+現在発生している問題
+ログイン成功・失敗時の Flash メッセージが正しく表示されない
 
-⑤任意項目（追加要素）
-・単体テストまたはE2Eテストを導入。
-・デプロイ手順のドキュメント化。
+expect(page).to have_xpath("//div[contains(@class, 'alert')]", text: 'ログインに成功しました') が失敗
+実際の HTML を確認すると、Flash メッセージが存在しない、または Turbo 関連の問題が原因の可能性あり
+ログイン後のページリダイレクトが正しく動作しない
+
+expect(page).to have_current_path(root_path, ignore_query: true) が失敗
+ログイン後も /users/sign_in ページに留まってしまう
+Selenium WebDriver のセッション競合エラーが発生
+
+SessionNotCreatedError: probably user data directory is already in use エラー発生
+--user-data-dir オプションを使用して解決を試みたが、完全には解決できていない
