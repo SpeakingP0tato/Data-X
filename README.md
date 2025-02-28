@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+・記事の投稿、編集、削除機能をRailsで実装。
+・記事にカテゴリやタグを関連付けるリレーションを構築。
 
-Things you may want to cover:
+②検索・フィルタリング機能
+・Vue.jsを用いて、記事をカテゴリごとにフィルタリングし、検索できる機能を実装。
 
-* Ruby version
+③ユーザー認証機能
+・Railsで簡易的なログイン/ログアウト機能を追加。
 
-* System dependencies
+④レスポンシブデザイン
+・フロントエンドでモバイル対応のデザインを適用。
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+⑤任意項目（追加要素）
+・単体テストまたはE2Eテストを導入。
+・デプロイ手順のドキュメント化。
