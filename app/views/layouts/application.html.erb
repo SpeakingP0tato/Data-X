@@ -10,27 +10,24 @@
 
     <%= yield :head %>
 
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= turbo_stream_from "flash" %>
+    <%= turbo_frame_tag "flash-messages", class: "hidden" %>
     <%= javascript_importmap_tags %>
   </head>
 
-<body class="h-screen bg-blue-50">
+  <body>
+    <div id="flash-messages" data-turbo="false">
+      <% flash.each do |type, message| %>
+        <div class="alert alert-<%= type %>">
+          <strong><%= message %></strong>
+        </div>
+      <% end %>
+    </div>
     
-    <% if flash[:alert] %>
-      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mx-auto w-3/4 text-center" role="alert">
-        <strong class="font-bold">Error!</strong>
-        <span class="block sm:inline"><%= flash[:alert] %></span>
-      </div>
-    <% end %>
-
     <main class="container mx-auto mt-20 py-8 px-5 flex items-center justify-center">
       <%= yield %>
     </main>

@@ -52,4 +52,7 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.cache_classes = false # trueからfalseに変更
+
+  config.active_support.to_time_preserves_timezone = :zone
+
 end

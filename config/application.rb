@@ -7,6 +7,13 @@ require "rails/all"
 Bundler.require(*Rails.groups)
 
 module Saigen
+  
+  class ApplicationController < ActionController::Base
+    def after_sign_in_path_for(resource)
+      root_path
+    end
+  end
+
   class Application < Rails::Application
     require_relative "boot"
 

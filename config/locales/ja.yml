@@ -1,6 +1,13 @@
 ja:
+  errors:
+    messages:
+      not_saved: "保存できませんでした"
+      taken: "すでに使用されています" 
   activerecord:
     errors:
+      messages:
+        record_invalid: "レコードが無効です。入力内容を確認してください。" 
+        taken: "すでに使用されています" 
       models:
         user:
           attributes:
@@ -9,12 +16,10 @@ ja:
               too_long: "ニックネームは%{count}文字以内で入力してください"
             email:
               blank: "メールアドレスを入力してください"
+              taken: "このメールアドレスは既に使用されています" 
             password:
               blank: "パスワードを入力してください"
               too_short: "パスワードは%{count}文字以上で入力してください"
               too_long: "パスワードは%{count}文字以内で入力してください"
             password_confirmation:
               confirmation: "確認用パスワードが一致しません"
-  devise:
-    failure:
-      invalid: "メールアドレスまたはパスワードが違います。"

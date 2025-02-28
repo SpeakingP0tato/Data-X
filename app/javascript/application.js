@@ -1,1 +1,7 @@
-// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+document.addEventListener("turbo:before-cache", () => {
+    let flash = document.querySelector("#flash-messages");
+    if (flash) {
+      flash.remove();
+    }
+  });
+  
